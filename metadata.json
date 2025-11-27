@@ -1,0 +1,43 @@
+{
+  "title": "Malawi User Engagement Dataset for App Feature Analysis",
+  "group": [
+    {
+      "name": "Richard Mnthali",
+      "registration_number": "BICT1823"
+    },
+    {
+      "name": "Praise Mwamlima",
+      "registration_number": "BICT2623"
+    },
+    {
+      "name": "Ethel Lwinga",
+      "registration_number": "BICT1423"
+    },
+    {
+      "name": "Blessings Phiri",
+      "registration_number": "BICT3223"
+    },
+    {
+      "name": "Madalo Zaphuka",
+      "registration_number": "BICT1822"
+    },
+    {
+      "name": "Kelvin Lackson",
+      "registration_number": "BICT1323"
+    }
+  ],
+  "date": "2025-11-27",
+  "generation_method": "Synthetic (Python/Faker+Pandas)",
+  "parameters": {
+    "n_users": 1000,
+    "n_days": 30,
+    "seed": 42,
+    "total_records": 30000,
+    "locations": "Malawi districts and cities",
+    "devices": "Realistic Malawi market distribution"
+  },
+  "source": "synthetic - Malawi context",
+  "license": "CC0",
+  "contact": "richardmunthali016@gmail.com",
+  "context": "Simulated Malawian mobile user behavior with realistic demographics"
+}
