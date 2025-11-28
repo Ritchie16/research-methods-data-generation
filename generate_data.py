@@ -25,8 +25,8 @@ devices = ["Android", "Android", "Android", "iOS", "KaiOS", "Feature Phone"]
 
 # Generate user base with MALAWI context
 users = []
-# Simulate 1000 users
-for i in range(1000):
+# Simulate 3000 users
+for i in range(3000):
     users.append({
         'user_id': i,
         'age': np.random.randint(18, 65),
@@ -109,7 +109,7 @@ metadata = {
     "date": "2025-11-27",
     "generation_method": "Synthetic (Python/Faker+Pandas)",
     "parameters": {
-        "n_users": 1000,
+        "n_users": 3000,
         "n_days": 30, 
         "seed": 42,
         "total_records": len(df),
