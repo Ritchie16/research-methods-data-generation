@@ -29,10 +29,10 @@
   "date": "2025-11-27",
   "generation_method": "Synthetic (Python/Faker+Pandas)",
   "parameters": {
-    "n_users": 1000,
-    "n_days": 30,
+    "n_users": 3000,
+    "n_days": 1,
     "seed": 42,
-    "total_records": 30000,
+    "total_records": 3000,
     "locations": "Malawi districts and cities",
     "devices": "Realistic Malawi market distribution"
   },

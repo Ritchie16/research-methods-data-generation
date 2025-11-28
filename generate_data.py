@@ -25,52 +25,44 @@ devices = ["Android", "Android", "Android", "iOS", "KaiOS", "Feature Phone"]
 
 # Generate user base with MALAWI context
 users = []
-# Simulate 3000 users
+# Simulate 3000 users (one row per user)
 for i in range(3000):
+    # Realistic user behavior patterns based on device
+    if np.random.choice(devices, p=[0.65, 0.20, 0.08, 0.05, 0.01, 0.01]) == 'Android':
+        base_clicks = np.random.poisson(lam=6)
+        base_duration = np.random.normal(320, 60)
+    elif np.random.choice(devices, p=[0.65, 0.20, 0.08, 0.05, 0.01, 0.01]) == 'iOS':
+        base_clicks = np.random.poisson(lam=7)
+        base_duration = np.random.normal(350, 50)
+    else:  # Basic phones
+        base_clicks = np.random.poisson(lam=3)
+        base_duration = np.random.normal(180, 40)
+    
+    # Urban vs rural engagement differences
+    urban_areas = ["Lilongwe", "Blantyre", "Mzuzu"]
+    location = np.random.choice(malawi_locations)
+    if location in urban_areas:
+        engagement_multiplier = 1.2
+    else:
+        engagement_multiplier = 0.8
+    
     users.append({
         'user_id': i,
         'age': np.random.randint(18, 65),
         'gender': np.random.choice(['M', 'F'], p=[0.52, 0.48]),  # Realistic Malawi gender ratio
-        'location': np.random.choice(malawi_locations),
-        'device': np.random.choice(devices, p=[0.65, 0.20, 0.08, 0.05, 0.01, 0.01]),  # Fixed: probabilities match 6 devices
-        'network': np.random.choice(['Airtel', 'TNM', 'MTL'], p=[0.55, 0.40, 0.05])  # Malawi telecom providers
+        'location': location,
+        'device': np.random.choice(devices, p=[0.65, 0.20, 0.08, 0.05, 0.01, 0.01]),
+        'network': np.random.choice(['Airtel', 'TNM', 'MTL'], p=[0.55, 0.40, 0.05]),  # Malawi telecom providers
+        'clicks': max(0, int(base_clicks * engagement_multiplier)),
+        'session_duration': max(30, int(base_duration * engagement_multiplier)),  # Minimum 30 seconds
+        'feature_version': np.random.choice(['A', 'B'], p=[0.5, 0.5]),
+        'feedback_score': np.random.choice([1, 2, 3, 4, 5, None], p=[0.05, 0.1, 0.25, 0.35, 0.2, 0.05]),
+        'retention_flag': np.random.choice([0, 1], p=[0.25, 0.75]),  # 75% retention
+        'data_used_mb': max(0, np.random.normal(50, 20))  # Data usage in MB
     })
 
-# Expand to daily interactions for 30 days
-data = []
-for user in users:
-    for day in range(30):
-        # Realistic user behavior patterns
-        if user['device'] == 'Android':
-            base_clicks = np.random.poisson(lam=6)
-            base_duration = np.random.normal(320, 60)
-        elif user['device'] == 'iOS':
-            base_clicks = np.random.poisson(lam=7)
-            base_duration = np.random.normal(350, 50)
-        else:  # Basic phones
-            base_clicks = np.random.poisson(lam=3)
-            base_duration = np.random.normal(180, 40)
-        
-        # Urban vs rural engagement differences
-        urban_areas = ["Lilongwe", "Blantyre", "Mzuzu"]
-        if user['location'] in urban_areas:
-            engagement_multiplier = 1.2
-        else:
-            engagement_multiplier = 0.8
-        
-        data.append({
-            **user,
-            'date': f'2025-11-{day+1:02d}',
-            'clicks': max(0, int(base_clicks * engagement_multiplier)),
-            'session_duration': max(30, int(base_duration * engagement_multiplier)),  # Minimum 30 seconds
-            'feature_version': np.random.choice(['A', 'B'], p=[0.5, 0.5]),
-            'feedback_score': np.random.choice([1, 2, 3, 4, 5, None], p=[0.05, 0.1, 0.25, 0.35, 0.2, 0.05]),
-            'retention_flag': np.random.choice([0, 1], p=[0.25, 0.75]),  # 75% retention
-            'data_used_mb': max(0, np.random.normal(50, 20))  # Data usage in MB
-        })
-
-# Create DataFrame
-df = pd.DataFrame(data)
+# Create DataFrame (3000 rows - one per user)
+df = pd.DataFrame(users)
 
 # Save to CSV
 df.to_csv('user_engagement_data.csv', index=False)
@@ -110,7 +102,7 @@ metadata = {
     "generation_method": "Synthetic (Python/Faker+Pandas)",
     "parameters": {
         "n_users": 3000,
-        "n_days": 30, 
+        "n_days": 1, 
         "seed": 42,
         "total_records": len(df),
         "locations": "Malawi districts and cities",
