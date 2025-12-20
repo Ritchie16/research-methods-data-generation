@@ -120,8 +120,7 @@ This dataset contains synthetic user engagement data for 3000 Malawian mobile ap
 python generate_data.py
 
 ```
-**
-Expected output:
+** Expected output:
 - File `user_engagement_data.csv` with 3,001 lines (header + 3,000 records)
 - File `metadata.json` with generation parameters
 - Console output showing sample data and distribution summaries
@@ -132,6 +131,16 @@ Check that:
 - `user_engagement_data.csv` has exactly 3,000 data rows
 - First few rows match expected values (download and compare)
 - `metadata.json` contains all expected generation parameters
+
+### Report generation
+1. run report_generatioin.py for a dashboard view of charts and graphs
+'''bash
+python report_generation.py
+'''
+2. run run_analysis.py for a styled interactive html report 
+'''bash
+python run_analysis.py 
+'''
 
 ### Verifying Identical Output
 
@@ -182,6 +191,16 @@ To confirm your generated data is identical to any previous run:
 
    # "seed": 42
    ```
+### Report generation
+1. run report_generatioin.py for a dashboard view of charts and graphs
+'''bash
+python report_generation.py
+'''
+2. run run_analysis.py for a styled interactive html report 
+'''bash
+python run_analysis.py 
+'''
+
 
 ## Metadata
 
