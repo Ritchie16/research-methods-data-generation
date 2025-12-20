@@ -191,6 +191,15 @@ To confirm your generated data is identical to any previous run:
 
    # "seed": 42
    ```
+### Report generation
+1. run report_generatioin.py for a dashboard view of charts and graphs
+'''bash
+python report_generation.py
+'''
+2. run run_analysis.py for a styled interactive html report 
+'''bash
+python run_analysis.py 
+'''
 
 
 ## Metadata
